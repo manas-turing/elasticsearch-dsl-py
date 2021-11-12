@@ -427,7 +427,8 @@ class AsyncSearch(Request):
 
         d = self.to_dict(count=True)
         # TODO: failed shards detection
-        return await es.count(index=self._index, body=d, **self._params)["count"]
+        count = await es.count(index=self._index, body=d, **self._params)
+        return count["count"]
 
     async def execute(self, ignore_cache=False):
         """
